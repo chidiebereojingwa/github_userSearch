@@ -11,6 +11,7 @@ import {
 import { IGitHubUser } from "./interfaces/IGitHubUser";
 import axios from 'axios';
 import RepositoriesList from './components/RepositoriesList';
+import GistsList from './components/GistsList';
 
 function App() {
   const [userSearch, setUserSearch] = useState<string>('');
@@ -106,7 +107,12 @@ function App() {
               <h1>Followers</h1>
             </Route>
             <Route path="/gists">
-              <h1>Gist</h1>
+              <h2>Gists</h2>
+              {foundUser ? (
+                <GistsList gistsUrl={foundUser.gists_url}></GistsList>
+              ) : (
+                <Redirect to="/"></Redirect>
+              )}
             </Route>
           </switch>
         </main>
