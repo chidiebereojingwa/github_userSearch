@@ -1,5 +1,6 @@
 import './App.css';
-import React from 'react';
+import React, { FormEvent, useState } from 'react';
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -7,8 +8,28 @@ import {
   Link,
   Redirect,
 } from "react-router-dom";
+import { IGitHubUser } from "./interfaces/IGitHubUser";
+import axios from 'axios';
 
 function App() {
+  const [userSearch, setUserSearch] = useState<string>('');
+  const [foundUser, setFoundUser] = useState<IGitHubUser>();
+
+ const handleSearchRequest = async () => {
+   try {
+     const response = await axios.get<IGitHubUser>(
+       `https://api.github.com/users/${userSearch}`
+     );
+     setFoundUser(response.data);
+   } catch (error) {
+     console.log(error);
+   }
+ };
+
+ const searchForUser = (event: FormEvent<HTMLFormElement>) => {
+   event.preventDefault();
+   handleSearchRequest();
+ };
  
   return (
     <div className="App">
@@ -33,7 +54,15 @@ function App() {
         <main>
           <switch>
             <Route exact path="/">
-              <h1>Home</h1>
+              <h2>Search for a user</h2>
+              <form className="search-user" onSubmit={searchForUser}>
+                <input
+                  value={userSearch}
+                  onChange={(event) => setUserSearch(event.target.value)}
+                  placeholder="Enter a username..."
+                />
+                <button>Search</button>
+              </form>
             </Route>
             <Route path="/repositories">
               <h1>Repositories</h1>
