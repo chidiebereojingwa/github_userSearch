@@ -12,6 +12,7 @@ import { IGitHubUser } from "./interfaces/IGitHubUser";
 import axios from 'axios';
 import RepositoriesList from './components/RepositoriesList';
 import GistsList from './components/GistsList';
+import FollowersList from './components/FollowersList';
 
 function App() {
   const [userSearch, setUserSearch] = useState<string>('');
@@ -104,7 +105,14 @@ function App() {
               )}
             </Route>
             <Route path="/followers">
-              <h1>Followers</h1>
+              <h2>Followers</h2>
+              {foundUser ? (
+                <FollowersList
+                  followersUrl={foundUser.followers_url}
+                ></FollowersList>
+              ) : (
+                <Redirect to="/"></Redirect>
+              )}
             </Route>
             <Route path="/gists">
               <h2>Gists</h2>

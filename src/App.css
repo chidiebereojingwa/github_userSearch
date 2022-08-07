@@ -1,0 +1,76 @@
+.App {
+  margin: 50px;
+}
+
+a {
+  text-decoration: none;
+}
+
+nav ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  padding: 0;
+}
+
+nav ul li {
+  margin: 1px;
+  border-radius: 4px 4px 0 0 ;
+  border: 1px solid grey;
+  border-bottom: 0;
+  color: grey;
+  flex: 1;
+  background-color: gold;
+}
+
+nav ul li span {
+  padding: 10px;
+  background-color: lightgrey;
+  width: 100%;
+  display: inline-block;
+}
+
+nav ul li a {
+  padding: 10px;
+  display: inline-block;
+}
+
+.search-user input {
+  padding: 10px;
+  border: 1px solid rgba(grey, 0.5);
+  outline: 0;
+}
+
+.search-user button {
+  padding: 12px;
+  background-color: goldenrod;
+  color: white;
+  border: 0;
+}
+
+.user-details {
+  display: flex;
+  align-items: center;
+}
+
+.user-details img  {
+  width: 200px;
+  height: 200px;
+  margin-left: 100px;
+}
+
+.follower {
+  display: flex;
+  align-items: center;
+}
+
+.follower img {
+  width: 200px;
+  height: 200px;
+  margin-right: 100px;
+}
+
+.follower h3 {
+  width: 400px;
+}
