@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import { IGitHubUser } from "./interfaces/IGitHubUser";
 import axios from 'axios';
+import RepositoriesList from './components/RepositoriesList';
 
 function App() {
   const [userSearch, setUserSearch] = useState<string>('');
@@ -63,9 +64,43 @@ function App() {
                 />
                 <button>Search</button>
               </form>
+
+              {foundUser && (
+                <div>
+                  <h3>{foundUser.login}</h3>
+                  <div className="user-details">
+                    <div>
+                      <p>
+                        <strong>Name: </strong>
+                        {foundUser.name}
+                      </p>
+                      <p>
+                        <strong>Company: </strong>
+                        {foundUser.company}
+                      </p>
+                      <p>
+                        <strong>Location: </strong>
+                        {foundUser.location}
+                      </p>
+                      <p>
+                        <strong>Followers: </strong>
+                        {foundUser.followers}
+                      </p>
+                    </div>
+                    <img src={foundUser.avatar_url} alt={foundUser.name} />
+                  </div>
+                </div>
+              )}
             </Route>
             <Route path="/repositories">
-              <h1>Repositories</h1>
+              <h2>Repositories</h2>
+              {foundUser ? (
+                <RepositoriesList
+                  repositoriesUrl={foundUser.repos_url}
+                ></RepositoriesList>
+              ) : (
+                <Redirect to="/"></Redirect>
+              )}
             </Route>
             <Route path="/followers">
               <h1>Followers</h1>
