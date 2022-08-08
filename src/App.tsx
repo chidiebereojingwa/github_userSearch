@@ -34,7 +34,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>GitHub Viewer</h1>
+      <h1 className="logo">GitHub Viewer</h1>
       <h2 className="searchText">Search for a user</h2>
       <form className="search-user" onSubmit={searchForUser}>
         <input
@@ -43,7 +43,7 @@ function App() {
           onChange={(event) => setUserSearch(event.target.value)}
           placeholder="Enter a username..."
         />
-        <button>Search</button>
+        <button className="searchButton">Search</button>
       </form>
 
       <Router>

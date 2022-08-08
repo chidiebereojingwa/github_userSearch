@@ -36,6 +36,12 @@ nav ul li a {
     display: inline-block;
 }
 
+.logo {
+    text-transform: uppercase;
+    color: darkcyan;
+    font-size: 50px;
+}
+
 .input {
     width: 343px;
 }
@@ -62,6 +68,7 @@ nav ul li a {
     background-color: goldenrod;
     color: white;
     border: 0;
+    cursor: pointer;
 }
 
 .user-details {
