@@ -36,6 +36,21 @@ nav ul li a {
   display: inline-block;
 }
 
+.input {
+    width: 343px;
+}
+
+.searchText {
+    text-align: center;
+    text-transform: inherit;
+    color: darkcyan;
+    font-size: 41px;
+}
+
+.search-user {
+    text-align: center;
+}
+
 .search-user input {
   padding: 10px;
   border: 1px solid rgba(grey, 0.5);

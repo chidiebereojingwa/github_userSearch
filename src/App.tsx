@@ -35,6 +35,17 @@ function App() {
   return (
     <div className="App">
       <h1>GitHub Viewer</h1>
+      <h2 className="searchText">Search for a user</h2>
+      <form className="search-user" onSubmit={searchForUser}>
+        <input
+        className="input"
+          value={userSearch}
+          onChange={(event) => setUserSearch(event.target.value)}
+          placeholder="Enter a username..."
+        />
+        <button>Search</button>
+      </form>
+
       <Router>
         <nav>
           <ul>
@@ -59,16 +70,6 @@ function App() {
         <main>
           <Switch>
             <Route exact path="/">
-              <h2>Search for a user</h2>
-              <form className="search-user" onSubmit={searchForUser}>
-                <input
-                  value={userSearch}
-                  onChange={(event) => setUserSearch(event.target.value)}
-                  placeholder="Enter a username..."
-                />
-                <button>Search</button>
-              </form>
-
               {foundUser && (
                 <div>
                   <h3>{foundUser.login}</h3>
