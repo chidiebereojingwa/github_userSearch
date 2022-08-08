@@ -15,7 +15,7 @@ const RepositoriesList = (props: { repositoriesUrl: string }) => {
     return (
         <div>
             {!repositoriesList.length && <p>No repositories found.</p>}
-            {!!repositoriesList.length &&
+            {repositoriesList.length &&
                 <ul>
                     {repositoriesList.map(repository => <li key={repository.id}>
                         <a href={repository.html_url} target="_blank" rel="noreferrer" >{repository.name}</a></li>)}

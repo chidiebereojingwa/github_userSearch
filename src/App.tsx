@@ -1,6 +1,5 @@
-import './App.css';
-import React, { FormEvent, useState } from 'react';
-
+import "./App.css";
+import React, { FormEvent, useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -8,32 +7,31 @@ import {
   Link,
   Redirect,
 } from "react-router-dom";
+import axios from "axios";
+import RepositoriesList from "./components/RepositoriesList";
 import { IGitHubUser } from "./interfaces/IGitHubUser";
-import axios from 'axios';
-import RepositoriesList from './components/RepositoriesList';
-import GistsList from './components/GistsList';
-import FollowersList from './components/FollowersList';
-
+import GistsList from "./components/GistsList";
+import FollowersList from "./components/FollowersList";
 function App() {
-  const [userSearch, setUserSearch] = useState<string>('');
+  const [userSearch, setUserSearch] = useState<string>("");
   const [foundUser, setFoundUser] = useState<IGitHubUser>();
 
- const handleSearchRequest = async () => {
-   try {
-     const response = await axios.get<IGitHubUser>(
-       `https://api.github.com/users/${userSearch}`
-     );
-     setFoundUser(response.data);
-   } catch (error) {
-     console.log(error);
-   }
- };
+  const performSearchRequest = async () => {
+    try {
+      const response = await axios.get<IGitHubUser>(
+        `https://api.github.com/users/${userSearch}`
+      );
+      setFoundUser(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
- const searchForUser = (event: FormEvent<HTMLFormElement>) => {
-   event.preventDefault();
-   handleSearchRequest();
- };
- 
+  const searchForUser = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    performSearchRequest();
+  };
+
   return (
     <div className="App">
       <h1>GitHub Viewer</h1>
@@ -44,18 +42,22 @@ function App() {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/repositories">Repositories</Link>
+              {!foundUser && <span>Repositories</span>}
+              {foundUser && <Link to="/repos">Repositories</Link>}
             </li>
             <li>
-              <Link to="/followers">Followers</Link>
+              {!foundUser && <span>Gists</span>}
+              {foundUser && <Link to="/gists">Gists</Link>}
             </li>
             <li>
-              <Link to="/gists">Gist</Link>
+              {!foundUser && <span>Followers</span>}
+              {foundUser && <Link to="/followers">Followers</Link>}
             </li>
           </ul>
         </nav>
+
         <main>
-          <switch>
+          <Switch>
             <Route exact path="/">
               <h2>Search for a user</h2>
               <form className="search-user" onSubmit={searchForUser}>
@@ -94,12 +96,20 @@ function App() {
                 </div>
               )}
             </Route>
-            <Route path="/repositories">
+            <Route path="/repos">
               <h2>Repositories</h2>
               {foundUser ? (
                 <RepositoriesList
                   repositoriesUrl={foundUser.repos_url}
                 ></RepositoriesList>
+              ) : (
+                <Redirect to="/"></Redirect>
+              )}
+            </Route>
+            <Route path="/gists">
+              <h2>Gists</h2>
+              {foundUser ? (
+                <GistsList gistsUrl={foundUser.gists_url}></GistsList>
               ) : (
                 <Redirect to="/"></Redirect>
               )}
@@ -114,15 +124,7 @@ function App() {
                 <Redirect to="/"></Redirect>
               )}
             </Route>
-            <Route path="/gists">
-              <h2>Gists</h2>
-              {foundUser ? (
-                <GistsList gistsUrl={foundUser.gists_url}></GistsList>
-              ) : (
-                <Redirect to="/"></Redirect>
-              )}
-            </Route>
-          </switch>
+          </Switch>
         </main>
       </Router>
     </div>

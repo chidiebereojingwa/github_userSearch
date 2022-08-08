@@ -16,7 +16,7 @@ const FollowersList = (props: { followersUrl: string }) => {
     return (
         <div>
             {!followersList.length && <p>No followers found.</p>}
-            {!!followersList.length &&
+            {followersList.length &&
                 followersList.map(follower =>
                     <div key={follower.id} className="follower">
                         <img src={follower.avatar_url} alt={follower.login} />
