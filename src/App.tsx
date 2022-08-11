@@ -33,17 +33,20 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="App" data-testid="app">
       <h1 className="logo">GitHub Viewer</h1>
       <h2 className="searchText">Search for a user</h2>
-      <form className="search-user" onSubmit={searchForUser}>
+      <form className="search-user" onSubmit={searchForUser} data-testid="form">
         <input
-        className="input"
+          className="input"
+          data-testid="search-input"
           value={userSearch}
           onChange={(event) => setUserSearch(event.target.value)}
           placeholder="Enter a username..."
         />
-        <button className="searchButton">Search</button>
+        <button className="searchButton" data-testid="search-button">
+          Search
+        </button>
       </form>
 
       <Router>
