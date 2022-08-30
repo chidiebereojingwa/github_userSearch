@@ -9,7 +9,7 @@ TYPESCRIPT
 CSS
 JEST
 ### Setup
-create a directory on a your local machin.
+create a directory on a your local machin
 1. open your terminal and type:  git clone https://github.com/chidiebereojingwa/github_userSearch.git
 2. run `npm install`
 3. Lunch `npm start`
